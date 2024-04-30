@@ -21,32 +21,47 @@ fetch('https://derek-web-service.onrender.com/')
         // Display skills
         document.getElementById('skills').innerHTML = `
             <h2>Skills</h2>
-            <p>Languages: ${data.Skills[0].Languages.join(', ')}</p>
+            <ul>
+                ${data.Skills.map(skill => `<li>${skill.Name}</li>`).join('')}
+            </ul>
         `;
 
         // Display education
         document.getElementById('education').innerHTML = `
             <h2>Education</h2>
-            ${data.Education.map(edu => `
-                <p>${edu.Institution}, ${edu.Description}</p>
-            `).join('')}
+            <ul>
+                ${data.Education.map(edu => `<li>${edu.Institution}, ${edu.Description}</li>`).join('')}
+            </ul>
         `;
 
         // Display work experience
         document.getElementById('work-experience').innerHTML = `
             <h2>Work Experience</h2>
-            <p>Company: ${data.Work_Experience[0].Company}</p>
-            <p>Job Title: ${data.Work_Experience[0].Job_Title}</p>
-            <p>Start Date: ${data.Work_Experience[0].Start_Date}</p>
-            <p>End Date: ${data.Work_Experience[0].End_Date}</p>
+            <ul>
+                ${data.Work_Experience.map(exp => `
+                    <li>
+                        <p>Company: ${exp.Company}</p>
+                        <p>Job Title: ${exp.Job_Title}</p>
+                        <p>Start Date: ${exp.Start_Date}</p>
+                        <p>End Date: ${exp.End_Date}</p>
+                        <p>Description: ${exp.Description}</p>
+                    </li>
+                `).join('')}
+            </ul>
         `;
 
         // Display personal references
         document.getElementById('personal-references').innerHTML = `
             <h2>Personal References</h2>
-            <p>Name: ${data.Personal_References[0].Name}</p>
-            <p>Contact No: ${data.Personal_References[0].Contact_No}</p>
-            <p>Relationship: ${data.Personal_References[0].Relationship}</p>
+            <ul>
+                ${data.Personal_References.map(ref => `
+                    <li>
+                        <p>Name: ${ref.Name}</p>
+                        <p>Contact No: ${ref.Contact_No}</p>
+                        <p>Relationship: ${ref.Relationship}</p>
+                    </li>
+                `).join('')}
+            </ul>
         `;
     })
     .catch(error => console.error('Error fetching data:', error));
